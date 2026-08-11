@@ -46,13 +46,13 @@ const createRecordStr = (
   return [
     'Option Explicit',
     '',
-    "' === fields ===",
+    "' === Fields ===",
     ...fields,
     '',
     "' === Constructor ===",
     ...constructor,
     '',
-    "' === getters ===",
+    "' === Getters ===",
     ...getters,
   ].join('\n');
 };
