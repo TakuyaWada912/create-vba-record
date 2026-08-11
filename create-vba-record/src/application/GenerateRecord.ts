@@ -9,6 +9,7 @@ export class GenerateRecord {
         `Property Get ${c.fieldName}() As ${c.fieldType}`,
         `  ${c.fieldName} = p${c.fieldName}`,
         `End Property`,
+        '',
       ].join('\n');
     });
 
@@ -20,7 +21,6 @@ export class GenerateRecord {
       '',
       "' === getters ===",
       ...getters,
-      '',
     ].join('\n');
   }
 }
