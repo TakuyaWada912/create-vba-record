@@ -19,6 +19,11 @@ describe('GenerateRecord', () => {
         "' === fields ===",
         'Private pId As String',
         '',
+        "' === Constructor ===",
+        'Public Sub Init(ByVal id_val As String)',
+        '  Id = id_val',
+        'End Sub',
+        '',
         "' === getters ===",
         'Property Get Id() As String',
         '  Id = pId',
@@ -35,8 +40,8 @@ describe('GenerateRecord', () => {
     };
 
     const c2: GenerateRecordCommand = {
-      fieldName: 'Name',
-      fieldType: 'String',
+      fieldName: 'Amount',
+      fieldType: 'Long',
     };
 
     const result = sut.execute([c1, c2]);
@@ -47,15 +52,21 @@ describe('GenerateRecord', () => {
         '',
         "' === fields ===",
         'Private pId As String',
-        'Private pName As String',
+        'Private pAmount As Long',
+        '',
+        "' === Constructor ===",
+        'Public Sub Init(ByVal id_val As String, ByVal amount_val As Long)',
+        '  Id = id_val',
+        '  Amount = amount_val',
+        'End Sub',
         '',
         "' === getters ===",
         'Property Get Id() As String',
         '  Id = pId',
         'End Property',
         '',
-        'Property Get Name() As String',
-        '  Name = pName',
+        'Property Get Amount() As Long',
+        '  Amount = pAmount',
         'End Property',
         '',
       ].join('\n'),

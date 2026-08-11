@@ -2,7 +2,8 @@ export class GenerateRecord {
   execute(command: GenerateRecordCommand[]): string {
     const fields = createFieldsStr(command);
     const getters = createGettersStr(command);
-    return createRecordStr(fields, getters);
+    const constructor = createConstructor(command);
+    return createRecordStr(fields, getters, constructor);
   }
 }
 
@@ -23,12 +24,33 @@ const createGettersStr = (command: GenerateRecordCommand[]): string[] => {
   });
 };
 
-const createRecordStr = (fields: string[], getters: string[]): string => {
+const createConstructor = (command: GenerateRecordCommand[]): string[] => {
+  const argsStr = command.map((c) => {
+    const argStr = c.fieldName.toLowerCase() + '_val';
+    return `ByVal ${argStr} As ${c.fieldType}`;
+  });
+
+  const signature = `Public Sub Init(${argsStr.join(', ')})`;
+
+  const fields = command.map((c) => {
+    return `  ${c.fieldName} = ${c.fieldName.toLowerCase() + '_val'}`;
+  });
+
+  return [signature, ...fields, 'End Sub'];
+};
+const createRecordStr = (
+  fields: string[],
+  getters: string[],
+  constructor: string[],
+): string => {
   return [
     'Option Explicit',
     '',
     "' === fields ===",
     ...fields,
+    '',
+    "' === Constructor ===",
+    ...constructor,
     '',
     "' === getters ===",
     ...getters,
