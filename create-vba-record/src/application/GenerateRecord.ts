@@ -42,7 +42,7 @@ const createConstructorSignature = (fields: GenerateRecordField[]): string => {
   });
 
   return `Public Sub Init(${argsStr.join(', ')})`;
-}
+};
 
 const createEquals = (command: GenerateRecordCommand): string[] => {
   const fieldCriteria = createFieldCriteria(command.fields);
@@ -90,7 +90,7 @@ const createFieldCriteria = (fields: GenerateRecordField[]): string[] => {
   }
 
   return result;
-}
+};
 
 const createRecordStr = (
   fields: string[],
