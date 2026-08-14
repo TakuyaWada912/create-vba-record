@@ -1,84 +1,86 @@
 class NotFoundElementWithIdError extends Error {
-    constructor(id: string) {
-        super(`IDに${id}を持った要素が見つかりません。`);
-    }
+  constructor(id: string) {
+    super(`IDに${id}を持った要素が見つかりません。`);
+  }
 }
 export class FieldList {
-    private readonly fieldsDiv: HTMLElement;
-    private readonly fieldAddButton: HTMLElement;
+  private readonly fieldsDiv: HTMLElement;
+  private readonly fieldAddButton: HTMLElement;
 
-    constructor() {
-        const fieldsDiv = document.getElementById('fields');
-        const fieldAddButton = document.getElementById('field-add-button');
+  constructor() {
+    const fieldsDiv = document.getElementById('fields');
+    const fieldAddButton = document.getElementById('field-add-button');
 
-        if (!fieldsDiv) {
-            throw new NotFoundElementWithIdError("fields");
-        }
-        if (!fieldAddButton) {
-            throw new NotFoundElementWithIdError("field-add-button");
-        }
-
-        this.fieldsDiv = fieldsDiv;
-        this.fieldAddButton = fieldAddButton;
+    if (!fieldsDiv) {
+      throw new NotFoundElementWithIdError('fields');
+    }
+    if (!fieldAddButton) {
+      throw new NotFoundElementWithIdError('field-add-button');
     }
 
-    initialize(): void {
-        this.fieldAddButton.addEventListener('click', this.handleAddField)
-    }
+    this.fieldsDiv = fieldsDiv;
+    this.fieldAddButton = fieldAddButton;
+  }
 
-    private handleAddField = (): void => {
-        const div = this.createFieldTextboxDiv();
+  initialize(): void {
+    this.fieldAddButton.addEventListener('click', this.handleAddField);
+  }
 
-        this.fieldsDiv.append(div);
-    }
+  private handleAddField = (): void => {
+    const div = this.createFieldTextboxDiv();
 
-    private createFieldTextboxDiv = (): HTMLDivElement => {
-        const divInnerElements = this.createFieldTextBoxDivInnerElements();
+    this.fieldsDiv.append(div);
+  };
 
-        const div = document.createElement('div');
-        div.classList.add("field");
-        div.append(...divInnerElements);
+  private createFieldTextboxDiv = (): HTMLDivElement => {
+    const divInnerElements = this.createFieldTextBoxDivInnerElements();
 
-        return div;
-    }
+    const div = document.createElement('div');
+    div.classList.add('field');
+    div.append(...divInnerElements);
 
-    private createFieldTextBoxDivInnerElements = (): HTMLElement[] => {
-        const newFieldNumber = this.fieldsDiv.childElementCount + 1;
+    return div;
+  };
 
-        const textboxId = "field-textbox-" + newFieldNumber.toString();
+  private createFieldTextBoxDivInnerElements = (): HTMLElement[] => {
+    const newFieldNumber = this.fieldsDiv.childElementCount + 1;
 
-        const label = this.createFieldLabel(newFieldNumber, textboxId);
+    const textboxId = 'field-textbox-' + newFieldNumber.toString();
 
-        const textbox = this.createFieldTextbox(textboxId);
+    const label = this.createFieldLabel(newFieldNumber, textboxId);
 
-        const deleteButton = this.createFieldDeleteButton(newFieldNumber);
+    const textbox = this.createFieldTextbox(textboxId);
 
-        return [label, textbox, deleteButton];
-    }
+    const deleteButton = this.createFieldDeleteButton(newFieldNumber);
 
-    private createFieldLabel = (
-        newFieldNumber: number,
-        textboxId: string): HTMLLabelElement => {
-        const label = document.createElement('label');
-        label.innerText = 'フィールド' + newFieldNumber.toString();
-        label.setAttribute("for", textboxId);
-        return label;
-    }
+    return [label, textbox, deleteButton];
+  };
 
-    private createFieldTextbox = (textboxId: string): HTMLInputElement => {
-        const textbox = document.createElement('input');
-        textbox.setAttribute("type", "text")
-        textbox.setAttribute("id", textboxId)
-        textbox.classList.add("field-textbox")
-        return textbox;
-    }
+  private createFieldLabel = (
+    newFieldNumber: number,
+    textboxId: string,
+  ): HTMLLabelElement => {
+    const label = document.createElement('label');
+    label.innerText = 'フィールド' + newFieldNumber.toString();
+    label.setAttribute('for', textboxId);
+    return label;
+  };
 
-    private createFieldDeleteButton = (newFieldNumber: number): HTMLButtonElement => {
-        const deleteButtonId = "field-delete-button-" + newFieldNumber.toString();
-        const deleteButton = document.createElement('button');
-        deleteButton.setAttribute("id", deleteButtonId)
-        deleteButton.innerText = "削除";
-        return deleteButton;
-    }
+  private createFieldTextbox = (textboxId: string): HTMLInputElement => {
+    const textbox = document.createElement('input');
+    textbox.setAttribute('type', 'text');
+    textbox.setAttribute('id', textboxId);
+    textbox.classList.add('field-textbox');
+    return textbox;
+  };
 
+  private createFieldDeleteButton = (
+    newFieldNumber: number,
+  ): HTMLButtonElement => {
+    const deleteButtonId = 'field-delete-button-' + newFieldNumber.toString();
+    const deleteButton = document.createElement('button');
+    deleteButton.setAttribute('id', deleteButtonId);
+    deleteButton.innerText = '削除';
+    return deleteButton;
+  };
 }
