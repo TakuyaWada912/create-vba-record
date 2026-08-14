@@ -81,7 +81,7 @@ const createFieldCriteria = (fields: GenerateRecordField[]): string[] => {
         return `     (${field.name} = other.${field.name}) Then`;
       }
 
-      return ``;
+      return `     (${field.name} = other.${field.name}) And _`;
     });
   } else {
     result = fields.map((f) => {
