@@ -1,13 +1,46 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>create-vba-record</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VBA レコードクラス生成</title>
+</head>
+
+<body>
+  <h1>VBAレコードクラス生成</h1>
+  <div id="form-container">
+    <div class="field">
+      <label for="classname-textbox">クラス名</label>
+      <input type="text" id="classname-textbox">
+      <button id="field-add-button">フィールド追加</button>
+    </div>
+    <hr>
+    <div id="fields">
+      <div class="field">
+        <label for="field-textbox-1">フィールド1</label>
+        <input type="text" id="field-textbox-1" class="field-textbox">
+        <button id="field-delete-button-1">削除</button>
+      </div>
+      <div class="field">
+        <label>フィールド2</label>
+        <input type="text" id="field-textbox-2">
+        <button id="field-delete-button-2">削除</button>
+      </div>
+      <div class="field">
+        <label>フィールド3</label>
+        <input type="text" id="field-textbox-3">
+        <button id="field-delete-button-3">削除</button>
+      </div>
+    </div>
+    <button id="generate-button">生成</button>
+    <button id="copy-button">クリップボードにコピー</button>
+    <div id="textarea-container">
+      <textarea id="result=textarea" cols="100" rows="20"></textarea>
+    </div>
+  </div>
+  </div>
+  <script type="module" src="/src/ui/main.ts"></script>
+</body>
+
 </html>
