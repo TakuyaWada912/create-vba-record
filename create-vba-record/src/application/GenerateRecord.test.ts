@@ -195,5 +195,5 @@ describe('GenerateRecord', () => {
         'End Function',
       ].join('\n'),
     );
-  })
+  });
 });
